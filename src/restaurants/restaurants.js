@@ -37,8 +37,8 @@ module.exports.handler = async (event) => {
                     },
                   })
                 );
-        body = requestJSON;
-        break;
+                body = requestJSON;
+                break;
             case 'GET /{id}':
                 body = await dynamo.send(
                     new GetCommand({
