@@ -9,7 +9,7 @@ const {
   DeleteCommand,
 } = require("@aws-sdk/lib-dynamodb");
 
-const { sendResponse, validateInput } = require("../../functions");
+const { sendResponse } = require("../../functions");
 
 const client = new DynamoDBClient({});
 
@@ -26,7 +26,6 @@ module.exports.handler = async (event) => {
     try {
         switch (event.httpMethod) {
             case 'POST':
-                // body = await dynamo.put(JSON.parse(event.body)).promise();
                 let requestJSON = JSON.parse(event.body);
                 await dynamo.send(
                   new PutCommand({
@@ -40,7 +39,7 @@ module.exports.handler = async (event) => {
                 );
                 body = requestJSON;
                 break;
-            case 'GET /{id}':
+            case 'GET /restaurants/{id}':
                 body = await dynamo.send(
                     new GetCommand({
                       TableName: tableName,
