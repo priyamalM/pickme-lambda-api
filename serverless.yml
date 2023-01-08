@@ -81,7 +81,42 @@ functions:
                 - PickmeUserPool
                 - Arn
             claims:
-              - email  
+              - email
+
+  ordersCreate:
+    handler: src/order/order.handler
+    events:
+      - http:
+          path: /orders
+          method: post
+          cors: true
+          authorizer:
+            name: pickmeUsersAuthorizer
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - PickmeUserPool
+                - Arn
+            claims:
+              - email
+
+  ordersGet:
+    handler: src/orders/order.handler
+    events:
+      - http:
+          path: /order/{id}
+          method: get
+          cors: true
+          authorizer:
+            name: pickmeUsersAuthorizer
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - PickmeUserPool
+                - Arn
+            claims:
+              - email            
+
 
 resources:
   Resources:
