@@ -18,14 +18,15 @@ const dynamo = DynamoDBDocumentClient.from(client);
 const tableName = "restaurants-table";
 
 module.exports.handler = async (event) => {
+    let body;
+    let statusCode = 200;
+    const headers = {
+        "Content-Type": "application/json",
+    };
     try {
-        let body;
-        let statusCode = 200;
-        const headers = {
-            "Content-Type": "application/json",
-        };
         switch (event.httpMethod) {
             case 'POST':
+                // body = await dynamo.put(JSON.parse(event.body)).promise();
                 let requestJSON = JSON.parse(event.body);
                 await dynamo.send(
                   new PutCommand({
