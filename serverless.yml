@@ -49,23 +49,6 @@ functions:
           method: post
           cors: true
 
-  privateAPI:
-    handler: src/user/private.handler
-    events:
-      - http:
-          path: user/private
-          method: post
-          cors: true
-          authorizer:
-            name: pickmeUsersAuthorizer
-            type: COGNITO_USER_POOLS
-            arn:
-              Fn::GetAtt:
-                - PickmeUserPool
-                - Arn
-            claims:
-              - email
-
   restaurantsCreate:
     handler: src/restaurants/restaurants.handler
     events:

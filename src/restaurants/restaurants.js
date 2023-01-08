@@ -31,7 +31,7 @@ module.exports.handler = async (event) => {
                   new PutCommand({
                     TableName: tableName,
                     Item: {
-                      id: requestJSON.id,
+                      restaurant_id: requestJSON.id,
                       location: requestJSON.town,
                       name: requestJSON.name,
                     },
@@ -44,7 +44,7 @@ module.exports.handler = async (event) => {
                     new GetCommand({
                       TableName: tableName,
                       Key: {
-                        id: event.pathParameters.id,
+                        restaurant_id: event.pathParameters.id,
                       },
                     })
                   );
