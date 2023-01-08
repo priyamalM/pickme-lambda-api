@@ -8,8 +8,8 @@ provider:
   stage: dev
   region: us-east-1
   environment:
-    user_pool_id: { Ref: UserPool }
-    client_id: { Ref: UserClient }
+    user_pool_id: { Ref: PickmeUserPool }
+    client_id: { Ref: PickmeUserClient }
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -43,21 +43,21 @@ functions:
           method: post
           cors: true
           authorizer:
-            name: PrivateAuthorizer
+            name: pickmeUsersAuthorizer
             type: COGNITO_USER_POOLS
             arn:
               Fn::GetAtt:
-                - UserPool
+                - PickmeUserPool
                 - Arn
             claims:
               - email
 
 resources:
   Resources:
-    UserPool:
+    PickmeUserPool:
       Type: AWS::Cognito::UserPool
       Properties:
-        UserPoolName: serverless-auth-pool
+        UserPoolName: pickme-auth-pool
         Schema:
           - Name: email
             Required: true
@@ -67,12 +67,12 @@ resources:
             MinimumLength: 6
         AutoVerifiedAttributes: ["email"]
 
-    UserClient:
+    PickmeUserClient:
       Type: AWS::Cognito::UserPoolClient
       Properties:
-        ClientName: user-pool-ui
+        ClientName: pickme-pool-ui
         GenerateSecret: false
-        UserPoolId: { Ref: UserPool }
+        UserPoolId: { Ref: PickmeUserPool }
         AccessTokenValidity: 5
         IdTokenValidity: 5
         ExplicitAuthFlows:
