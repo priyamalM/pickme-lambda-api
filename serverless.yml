@@ -52,6 +52,35 @@ functions:
             claims:
               - email
 
+  restaurantsAPI:
+    handler: src/restaurants/restaurants.handler
+    events:
+      - http:
+          path: user/restaurants
+          method: post
+          cors: true
+          authorizer:
+            name: pickmeUsersAuthorizer
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - PickmeUserPool
+                - Arn
+            claims:
+              - email
+          path: user/restaurants/{id}
+          method: get
+          cors: true
+          authorizer:
+            name: pickmeUsersAuthorizer
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - PickmeUserPool
+                - Arn
+            claims:
+              - email                  
+
 resources:
   Resources:
     PickmeUserPool:
