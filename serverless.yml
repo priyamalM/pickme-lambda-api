@@ -100,15 +100,15 @@ functions:
             claims:
               - email  
 
-Parameters:
-  HashKeyElementName:
-    Type: String
-    Default: id
-    Description: Hash Key Name
-  HashKeyElementType:
-    Type: String
-    Default: S
-    Description: Hash Key Type
+# Parameters:
+#   HashKeyElementName:
+#     Type: String
+#     Default: id
+#     Description: Hash Key Name
+#   HashKeyElementType:
+#     Type: String
+#     Default: S
+#     Description: Hash Key Type
 
 resources:
   Resources:
@@ -142,11 +142,11 @@ resources:
         TableName: Restaurant
         AttributeDefinitions:
           - 
-            AttributeName: !Ref HashKeyElementName
-            AttributeType: !Ref HashKeyElementType
+            AttributeName: restaurant_id
+            AttributeType: String
         KeySchema:
           - 
-            AttributeName: !Ref HashKeyElementName
+            AttributeName: restaurant_id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 5
