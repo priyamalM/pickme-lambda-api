@@ -13,7 +13,7 @@ const dynamo = DynamoDBDocumentClient.from(client);
 
 const tableName = "restaurants-table";
 
-module.exports.handler = async (event, context) => {
+module.exports.handler = async (event) => {
     try {
         let body;
         let statusCode = 200;
@@ -23,7 +23,19 @@ module.exports.handler = async (event, context) => {
         switch (event.httpMethod) {
             case 'POST':
                 body = await dynamo.put(JSON.parse(event.body)).promise();
-                break;
+                let requestJSON = JSON.parse(event.body);
+                await dynamo.send(
+                  new PutCommand({
+                    TableName: tableName,
+                    Item: {
+                      id: requestJSON.id,
+                      location: requestJSON.town,
+                      name: requestJSON.name,
+                    },
+                  })
+                );
+        body = `Put item ${requestJSON.id}`;
+        break;
             case 'GET /{id}':
                 body = await dynamo.send(
                     new GetCommand({
