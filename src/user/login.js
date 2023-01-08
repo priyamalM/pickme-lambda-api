@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk')
-const { sendResponse, validateInput } = require("../functions");
+const { sendResponse, validateInput } = require("../../functions");
 
 const cognito = new AWS.CognitoIdentityServiceProvider()
 
