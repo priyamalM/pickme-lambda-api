@@ -15,7 +15,7 @@ const client = new DynamoDBClient({});
 
 const dynamo = DynamoDBDocumentClient.from(client);
 
-const tableName = "restaurants-table";
+const tableName = "Restaurant";
 
 module.exports.handler = async (event) => {
     let body;

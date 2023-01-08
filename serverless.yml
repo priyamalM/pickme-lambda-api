@@ -100,16 +100,6 @@ functions:
             claims:
               - email  
 
-# Parameters:
-#   HashKeyElementName:
-#     Type: String
-#     Default: id
-#     Description: Hash Key Name
-#   HashKeyElementType:
-#     Type: String
-#     Default: S
-#     Description: Hash Key Type
-
 resources:
   Resources:
     PickmeUserPool:
@@ -150,8 +140,20 @@ resources:
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 5
-          WriteCapacityUnits: 5 
-    # Outputs:
-    #   Restaurant:
-    #     Description: Table Created using this template.
-    #     Value: !Ref RestaurantTable      
+          WriteCapacityUnits: 5
+
+    OrderTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Orders
+        AttributeDefinitions:
+          - 
+            AttributeName: order_id
+            AttributeType: S
+        KeySchema:
+          - 
+            AttributeName: order_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5       
