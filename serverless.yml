@@ -52,11 +52,11 @@ functions:
             claims:
               - email
 
-  restaurantsAPI:
+  restaurantsCreate:
     handler: src/restaurants/restaurants.handler
     events:
       - http:
-          path: user/restaurants
+          path: /restaurants
           method: post
           cors: true
           authorizer:
@@ -67,8 +67,13 @@ functions:
                 - PickmeUserPool
                 - Arn
             claims:
-              - email
-          path: user/restaurants/{id}
+              - email                  
+
+  restaurantsGet:
+    handler: src/restaurants/restaurants.handler
+    events:
+      - http:
+          path: /restaurants/{id}
           method: get
           cors: true
           authorizer:
@@ -79,7 +84,7 @@ functions:
                 - PickmeUserPool
                 - Arn
             claims:
-              - email                  
+              - email  
 
 resources:
   Resources:
