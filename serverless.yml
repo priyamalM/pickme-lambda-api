@@ -17,6 +17,20 @@ provider:
         - cognito-idp:AdminCreateUser
         - cognito-idp:AdminSetUserPassword
       Resource: "*"  
+    - Effect: Allow
+      Action:
+        - dynamodb:BatchGet*,
+        - dynamodb:DescribeStream,
+        - dynamodb:DescribeTable,
+        - dynamodb:Get*,
+        - dynamodb:Query,
+        - dynamodb:Scan,
+        - dynamodb:BatchWrite*,
+        - dynamodb:CreateTable,
+        - dynamodb:Delete*,
+        - dynamodb:Update*,
+        - dynamodb:PutItem
+      Resource: "*"  
 
 functions:
   loginUser:

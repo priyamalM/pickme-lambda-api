@@ -11,7 +11,7 @@ const client = new DynamoDBClient({});
 
 const dynamo = DynamoDBDocumentClient.from(client);
 
-const tableName = "http-crud-tutorial-items";
+const tableName = "restaurants-table";
 
 module.exports.handler = async (event, context) => {
     try {
@@ -38,8 +38,6 @@ module.exports.handler = async (event, context) => {
             default:
                 throw new Error(`Unsupported route: "${event.routeKey}"`);        
         }
-
-        // return sendResponse(200, { message: 'Success', token: response.AuthenticationResult.IdToken })
     }
     catch (error) {
         const message = error.message ? error.message : 'Internal server error'
