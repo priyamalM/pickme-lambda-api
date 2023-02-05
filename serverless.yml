@@ -101,7 +101,7 @@ functions:
               - email
 
   ordersGet:
-    handler: src/orders/order.handler
+    handler: src/order/order.handler
     events:
       - http:
           path: /order/{id}
