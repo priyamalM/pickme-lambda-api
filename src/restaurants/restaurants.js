@@ -39,7 +39,7 @@ module.exports.handler = async (event) => {
                 );
                 body = requestJSON;
                 break;
-            case 'GET /restaurants/{id}':
+            case 'GET':
                 body = await dynamo.send(
                     new ScanCommand({
                       TableName: tableName,
