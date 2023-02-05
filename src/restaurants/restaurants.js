@@ -50,6 +50,17 @@ module.exports.handler = async (event) => {
         );
         body = body.Item;
         break;
+      case 'DELETE':
+        await dynamo.send(
+          new DeleteCommand({
+            TableName: tableName,
+            Key: {
+              restaurant_id: event.pathParameters.id,
+            },
+          })
+        );
+        body = {};
+        break;
       default:
         throw new Error(`Unsupported route: "${event.routeKey}"`);
     }
