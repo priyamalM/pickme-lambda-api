@@ -20,11 +20,7 @@ provider:
     - Effect: Allow
       Action:
         - dynamodb:*
-      Resource: "arn:aws:dynamodb:us-east-1:322898024499:table/Restaurant"
-    - Effect: Allow
-      Action:
-        - dynamodb:*
-      Resource: "arn:aws:dynamodb:us-east-1:322898024499:table/Orders"     
+      Resource: "*"
 
 functions:
   loginUser:
