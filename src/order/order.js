@@ -39,7 +39,6 @@ module.exports.handler = async (event) => {
                 body = requestJSON;
                 break;
             case 'GET':
-                console.log(event.pathParameters.id)    
                 body = await dynamo.send(
                     new GetCommand({
                       TableName: tableName,

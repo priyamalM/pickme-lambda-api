@@ -41,14 +41,14 @@ module.exports.handler = async (event) => {
                 break;
             case 'GET':
                 body = await dynamo.send(
-                    new ScanCommand({
-                      TableName: tableName,
-                      // Key: {
-                      //   restaurant_id: event.pathParameters.id,
-                      // },
-                    })
+                  new GetCommand({
+                    TableName: tableName,
+                    Key: {
+                      restaurant_id: event.pathParameters.id,
+                    },
+                  })
                   );
-                  body = body.Items;
+                  body = body.Item;
                   break;
             default:
                 throw new Error(`Unsupported route: "${event.routeKey}"`);        
