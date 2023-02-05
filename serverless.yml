@@ -18,7 +18,7 @@ provider:
         - cognito-idp:AdminSetUserPassword
       Resource: "*"  
     - Effect: Allow
-      Action:
+      Action: 
         - dynamodb:*
       Resource: "*"
 
@@ -62,6 +62,23 @@ functions:
       - http:
           path: /restaurants/{id}
           method: get
+          cors: true
+          authorizer:
+            name: pickmeUsersAuthorizer
+            type: COGNITO_USER_POOLS
+            arn:
+              Fn::GetAtt:
+                - PickmeUserPool
+                - Arn
+            claims:
+              - email
+
+  restaurantsDelete:
+    handler: src/restaurants/restaurants.handler
+    events:
+      - http:
+          path: /restaurants/{id}
+          method: delete
           cors: true
           authorizer:
             name: pickmeUsersAuthorizer
