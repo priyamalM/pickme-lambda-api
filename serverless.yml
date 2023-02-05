@@ -19,18 +19,7 @@ provider:
       Resource: "*"  
     - Effect: Allow
       Action:
-        - dynamodb:BatchGet*,
-        - dynamodb:DescribeStream,
-        - dynamodb:DescribeTable,
-        - dynamodb:Get*,
-        - dynamodb:GetItem, 
-        - dynamodb:Query,
-        - dynamodb:Scan,
-        - dynamodb:BatchWrite*,
-        - dynamodb:CreateTable,
-        - dynamodb:Delete*,
-        - dynamodb:Update*,
-        - dynamodb:PutItem
+        - dynamodb:*
       Resource: "*"  
 
 functions:
